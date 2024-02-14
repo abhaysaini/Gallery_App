@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gallery App</string>
+    <string name="total_images">Total Image\n</string>
 </resources>
