@@ -10,7 +10,7 @@ import com.example.galleryapp.data.models.AlbumData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AlbumDataSource(private val contentResolver: ContentResolver) :
+class AlbumPagingSource(private val contentResolver: ContentResolver) :
     PagingSource<Int, AlbumData>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumData> {
@@ -41,6 +41,7 @@ class AlbumDataSource(private val contentResolver: ContentResolver) :
         val albums = mutableListOf<AlbumData>()
         val albumSet = mutableSetOf<String>()
         val albumMap = mutableMapOf<String, Pair<String, Int>>()
+        var imageCount = 0
         val projection = arrayOf(
             MediaStore.Images.Media.BUCKET_ID,
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
@@ -54,12 +55,14 @@ class AlbumDataSource(private val contentResolver: ContentResolver) :
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
                     val folderId = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID))
+                    Log.i("abhay",folderId)
                     if(!albumSet.contains(folderId)){
                         albumSet.add(folderId)
-                        val albumName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
-                        var imageCount = albumMap[folderId]?.second ?: 0
-                        albumMap[folderId] = albumName to (imageCount + 1)
                     }
+                    val albumName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
+                    Log.i("abhay",albumName)
+                    imageCount = albumMap[folderId]?.second ?: 0
+                    albumMap[folderId] = albumName to (imageCount + 1)
                 }
             }
             cursor?.close()

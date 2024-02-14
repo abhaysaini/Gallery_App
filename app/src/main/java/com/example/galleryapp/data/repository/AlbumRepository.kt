@@ -4,8 +4,8 @@ import android.content.ContentResolver
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.galleryapp.ui.albums.paging.AlbumDataSource
 import com.example.galleryapp.data.models.AlbumData
+import com.example.galleryapp.ui.albums.paging.AlbumPagingSource
 import kotlinx.coroutines.flow.Flow
 
 class AlbumRepository (private val contentResolver: ContentResolver){
@@ -16,7 +16,7 @@ class AlbumRepository (private val contentResolver: ContentResolver){
                 pageSize = 1,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { AlbumDataSource(contentResolver) }
+            pagingSourceFactory = { AlbumPagingSource(contentResolver) }
         ).flow
     }
 }
