@@ -15,7 +15,7 @@
         android:id="@+id/tvEssential"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Essential Albums"
+        android:text="@string/album"
         android:textSize="20sp"
         android:textColor="@color/purple_shadow"
         android:textStyle="bold"

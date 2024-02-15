@@ -1,4 +1,4 @@
-package com.example.galleryapp.ui.albums.paging
+package com.example.galleryapp.data.paging
 
 import android.content.ContentResolver
 import android.content.ContentUris
@@ -16,17 +16,20 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumData> {
         try {
-            Log.i("abhay","Load Method Called")
+            Log.i("abhay", "Load Method Called")
             val currentPage = params.key ?: STARTING_PAGE_INDEX
             val nextPage = currentPage.plus(1)
             val albums = fetchAlbums(contentResolver)
             return LoadResult.Page(
-                data = albums ,
+                data = albums,
                 prevKey = null,
                 nextKey = null
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            Log.e("abhay", "Error fetching albums", e)
+            return LoadResult.Error(Exception("Failed to fetch albums"))
+        } finally {
+            Log.i("abhay", "Finally block executed")
         }
     }
 
@@ -51,13 +54,14 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
             MediaStore.Images.Media.DATA
         )
         val sortOrder = "${MediaStore.Images.Media.DATE_ADDED} DESC"
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Default) {
             val cursor = contentResolver.query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, sortOrder
             )
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
-                    val folderId = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID))
+                    val folderId =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID))
                     if (!albumSet.contains(folderId)) {
                         albumSet.add(folderId)
                         albumImagesUri[folderId] = mutableListOf()
@@ -67,7 +71,8 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
                         cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
                     )
                     albumImagesUri[folderId]?.add(imageUri)
-                    val albumName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
+                    val albumName =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
                     imageCount = albumMap[folderId]?.second ?: 0
                     albumMap[folderId] = albumName to (imageCount + 1)
                 }
@@ -77,7 +82,7 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
         albumMap.forEach { (folderId, pair) ->
             val thumbNail = getAlbumThumbnail(contentResolver, bucketId = folderId)
             val imageUriList = albumImagesUri[folderId] ?: emptyList()
-            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second,imageUriList))
+            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second, imageUriList))
         }
         return albums
     }

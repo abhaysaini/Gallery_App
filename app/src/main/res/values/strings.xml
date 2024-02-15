@@ -8,4 +8,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="title_activity_basic">basic</string>
+    <string name="favourite">Favourite</string>
+    <string name="imageCount">40</string>
+    <string name="album">Essential Albums</string>
+    <string name="galleryApp">Gallery App</string>
+    <string name="quote">Explore your visual story</string>
+    <string name="image_count_format">%d : Images</string>
 </resources>

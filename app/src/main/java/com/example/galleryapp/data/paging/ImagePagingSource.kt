@@ -1,6 +1,5 @@
-package com.example.galleryapp.ui.images.paging
+package com.example.galleryapp.data.paging
 
-import android.net.Uri
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -33,7 +32,10 @@ class ImagePagingSource(private val albumData: AlbumData) :
                 nextKey = null
             )
         } catch (e: Exception) {
-            return LoadResult.Error(e)
+            Log.e("abhay", "Error fetching albums", e)
+            return LoadResult.Error(Exception("Failed to fetch Images"))
+        } finally {
+            Log.i("abhay", "Finally block executed")
         }
     }
 

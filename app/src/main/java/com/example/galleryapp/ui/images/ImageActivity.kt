@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.galleryapp.R
 import com.example.galleryapp.data.models.AlbumData
 import com.example.galleryapp.data.repository.ImagesRepository
 import com.example.galleryapp.databinding.ActivityImageBinding
@@ -40,7 +41,7 @@ class ImageActivity : AppCompatActivity() {
         })
         binding.apply {
             albumName.text = album.albumName
-            totalImageCount.text = album.imageCount.toString() + " : Images"
+            totalImageCount.text = String.format(resources.getString(R.string.image_count_format), album.imageCount)
             backButton.setOnClickListener {
             dispatcher.onBackPressed()
             }

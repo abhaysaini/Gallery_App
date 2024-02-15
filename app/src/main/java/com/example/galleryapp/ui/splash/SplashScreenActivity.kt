@@ -31,7 +31,6 @@ import kotlinx.coroutines.yield
 class SplashScreenActivity : AppCompatActivity() {
 
     lateinit var binding:ActivitySplashScreenBinding
-
     private val splashTime: Long = 2000
 
 
@@ -42,14 +41,20 @@ class SplashScreenActivity : AppCompatActivity() {
         startSplashTimer()
     }
 
-
     private fun startSplashTimer() {
         CoroutineScope(Dispatchers.Main).launch {
             askPermission()
-            yield()
             delay(splashTime)
             navigateToMainActivity()
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun navigateToMainActivity() {

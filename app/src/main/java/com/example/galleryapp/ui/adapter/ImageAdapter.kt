@@ -15,7 +15,7 @@ import com.example.galleryapp.ui.fullScreen.ImageDetailScreenActivity
 class ImageAdapter :
     PagingDataAdapter<ImageData, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
 
-    lateinit var binding: ItemImageBinding
+    private lateinit var binding: ItemImageBinding
 
     override fun onBindViewHolder(holder: ImageAdapter.ImagesViewHolder, position: Int) {
         val album = getItem(position)
