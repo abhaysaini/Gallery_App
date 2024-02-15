@@ -89,4 +89,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
+    //Zoom In-Out
+    implementation ("com.github.MikeOrtiz:TouchImageView:1.4.1")
+
 }

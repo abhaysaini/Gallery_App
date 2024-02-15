@@ -21,6 +21,9 @@
         android:theme="@style/Theme.GalleryApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fullScreen.ImageDetailScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.images.ImageActivity"
             android:exported="false" />
         <activity

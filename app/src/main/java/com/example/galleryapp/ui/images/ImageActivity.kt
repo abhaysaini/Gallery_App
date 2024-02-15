@@ -42,8 +42,7 @@ class ImageActivity : AppCompatActivity() {
             albumName.text = album.albumName
             totalImageCount.text = album.imageCount.toString() + " : Images"
             backButton.setOnClickListener {
-//            dispatcher.onBackPressed()
-                finish()
+            dispatcher.onBackPressed()
             }
         }
 

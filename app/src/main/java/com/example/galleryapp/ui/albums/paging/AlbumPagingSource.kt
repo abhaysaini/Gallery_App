@@ -50,9 +50,10 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
             MediaStore.Images.Media._ID,
             MediaStore.Images.Media.DATA
         )
+        val sortOrder = "${MediaStore.Images.Media.DATE_ADDED} DESC"
         withContext(Dispatchers.IO) {
             val cursor = contentResolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, sortOrder
             )
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
@@ -77,10 +78,6 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
             val thumbNail = getAlbumThumbnail(contentResolver, bucketId = folderId)
             val imageUriList = albumImagesUri[folderId] ?: emptyList()
             albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second,imageUriList))
-        }
-
-        albumImagesUri.forEach {
-            Log.i("abhay",it.key +"  "+  it.value.toString())
         }
         return albums
     }

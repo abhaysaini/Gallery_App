@@ -1,17 +1,16 @@
 package com.example.galleryapp.ui.adapter
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.galleryapp.R
 import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.databinding.ItemImageBinding
+import com.example.galleryapp.ui.fullScreen.ImageDetailScreenActivity
 
 class ImageAdapter :
     PagingDataAdapter<ImageData, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
@@ -38,7 +37,9 @@ class ImageAdapter :
                 .load(uri)
                 .into(binding.imageView)
             itemView.setOnClickListener {
-                //
+                val imageIntent = Intent(itemView.context, ImageDetailScreenActivity::class.java)
+                imageIntent.putExtra("imageUri", uri)
+                itemView.context.startActivity(imageIntent)
             }
         }
     }
@@ -49,7 +50,6 @@ class ImageAdapter :
                 return oldItem == newItem
             }
 
-            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: ImageData, newItem: ImageData): Boolean {
                 return oldItem.imageUri == newItem.imageUri
             }
