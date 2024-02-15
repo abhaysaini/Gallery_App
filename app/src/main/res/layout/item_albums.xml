@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     >
 
     <com.google.android.material.card.MaterialCardView
@@ -33,6 +34,7 @@
         android:layout_margin="8dp"
         android:fontFamily="@font/nunito"
         android:text="Favourite"
+        android:textColor="@color/purple_shadow"
         android:textSize="16sp"
         android:textStyle="bold"
         android:ellipsize="end"
@@ -51,6 +53,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:text="0"
+        android:textColor="@color/purple_shadow"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

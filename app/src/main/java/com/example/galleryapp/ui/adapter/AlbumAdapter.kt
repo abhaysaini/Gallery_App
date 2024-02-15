@@ -1,4 +1,5 @@
 package com.example.galleryapp.ui.adapter
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -8,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.galleryapp.databinding.ItemAlbumsBinding
 import com.example.galleryapp.data.models.AlbumData
 
-class AlbumAdapter : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(ALBUM_COMPARATOR) {
+class AlbumAdapter(private val listener: OnAlbumClickListener) : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(ALBUM_COMPARATOR) {
 
     lateinit var binding: ItemAlbumsBinding
 
@@ -24,7 +25,7 @@ class AlbumAdapter : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(
         }
     }
 
-    inner class AlbumViewHolder(val binding: ItemAlbumsBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class AlbumViewHolder(private val binding: ItemAlbumsBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: AlbumData) {
             binding.albumName.text = album.albumName
@@ -33,7 +34,7 @@ class AlbumAdapter : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(
                 .into(binding.albumImage)
             binding.albumImageCount.text = album.imageCount.toString()
             itemView.setOnClickListener {
-                // Handle item click
+                listener.onAlbumClick(album)
             }
 
         }
@@ -49,5 +50,9 @@ class AlbumAdapter : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(
                 return oldItem.albumName == newItem.albumName && oldItem.imageUri == newItem.imageUri
             }
         }
+    }
+
+    interface OnAlbumClickListener {
+        fun onAlbumClick(album: AlbumData)
     }
 }

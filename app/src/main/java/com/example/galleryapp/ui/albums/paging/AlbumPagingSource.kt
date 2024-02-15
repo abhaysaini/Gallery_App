@@ -1,6 +1,7 @@
 package com.example.galleryapp.ui.albums.paging
 
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -40,6 +41,7 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
     private suspend fun fetchAlbums(contentResolver: ContentResolver): List<AlbumData> {
         val albums = mutableListOf<AlbumData>()
         val albumSet = mutableSetOf<String>()
+        val albumImagesUri = mutableMapOf<String, MutableList<Uri>>()
         val albumMap = mutableMapOf<String, Pair<String, Int>>()
         var imageCount = 0
         val projection = arrayOf(
@@ -55,12 +57,16 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
             cursor?.use { cursor ->
                 while (cursor.moveToNext()) {
                     val folderId = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID))
-                    Log.i("abhay",folderId)
-                    if(!albumSet.contains(folderId)){
+                    if (!albumSet.contains(folderId)) {
                         albumSet.add(folderId)
+                        albumImagesUri[folderId] = mutableListOf()
                     }
+                    val imageUri = ContentUris.withAppendedId(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
+                    )
+                    albumImagesUri[folderId]?.add(imageUri)
                     val albumName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
-                    Log.i("abhay",albumName)
                     imageCount = albumMap[folderId]?.second ?: 0
                     albumMap[folderId] = albumName to (imageCount + 1)
                 }
@@ -69,7 +75,12 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
         }
         albumMap.forEach { (folderId, pair) ->
             val thumbNail = getAlbumThumbnail(contentResolver, bucketId = folderId)
-            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second))
+            val imageUriList = albumImagesUri[folderId] ?: emptyList()
+            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second,imageUriList))
+        }
+
+        albumImagesUri.forEach {
+            Log.i("abhay",it.key +"  "+  it.value.toString())
         }
         return albums
     }
