@@ -14,21 +14,17 @@ class ImageDetailScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityImageDetailScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val dispatcher = this.onBackPressedDispatcher
-        dispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finish()
-            }
-        })
         binding.backButton.setOnClickListener {
-            dispatcher.onBackPressed()
+            finish()
         }
-
         val imageUri = intent.getParcelableExtra<Uri>("imageUri")
-        Log.i("saini",imageUri.toString())
+        Log.i(TAG,imageUri.toString())
         Glide.with(this)
             .load(imageUri)
             .into(binding.imageDetails)
+    }
+
+    companion object{
+        const val TAG = "ImageDetailScreen"
     }
 }

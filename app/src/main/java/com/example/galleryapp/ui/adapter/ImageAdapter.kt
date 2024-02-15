@@ -7,15 +7,22 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.databinding.ItemImageBinding
 import com.example.galleryapp.ui.fullScreen.ImageDetailScreenActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ImageAdapter :
     PagingDataAdapter<ImageData, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
 
     private lateinit var binding: ItemImageBinding
+    private val adapterScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onBindViewHolder(holder: ImageAdapter.ImagesViewHolder, position: Int) {
         val album = getItem(position)
@@ -36,6 +43,11 @@ class ImageAdapter :
             Glide.with(itemView.context)
                 .load(uri)
                 .into(binding.imageView)
+//            adapterScope.launch {
+//                withContext(Dispatchers.IO){
+//                    binding.imageView.load(uri)
+//                }
+//            }
             itemView.setOnClickListener {
                 val imageIntent = Intent(itemView.context, ImageDetailScreenActivity::class.java)
                 imageIntent.putExtra("imageUri", uri)

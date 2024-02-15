@@ -18,7 +18,7 @@ class ImagePagingSource(private val albumData: AlbumData) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ImageData > {
         try {
-            Log.i("abhay","Load Method Called")
+            Log.i(TAG,"Load Method Called")
             val currentPage = params.key ?: STARTING_PAGE_INDEX
             val nextPage = currentPage.plus(1)
             val imageData = mutableListOf<ImageData>()
@@ -32,14 +32,15 @@ class ImagePagingSource(private val albumData: AlbumData) :
                 nextKey = null
             )
         } catch (e: Exception) {
-            Log.e("abhay", "Error fetching albums", e)
+            Log.e(TAG, "Error fetching albums", e)
             return LoadResult.Error(Exception("Failed to fetch Images"))
         } finally {
-            Log.i("abhay", "Finally block executed")
+            Log.i(TAG, "Finally block executed")
         }
     }
 
     companion object {
         private const val STARTING_PAGE_INDEX = 1
+        const val TAG = "ImagePagingSource"
     }
 }

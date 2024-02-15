@@ -16,7 +16,7 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumData> {
         try {
-            Log.i("abhay", "Load Method Called")
+            Log.i(TAG, "Load Method Called")
             val currentPage = params.key ?: STARTING_PAGE_INDEX
             val nextPage = currentPage.plus(1)
             val albums = fetchAlbums(contentResolver)
@@ -26,10 +26,10 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
                 nextKey = null
             )
         } catch (e: Exception) {
-            Log.e("abhay", "Error fetching albums", e)
+            Log.e(TAG, "Error fetching albums", e)
             return LoadResult.Error(Exception("Failed to fetch albums"))
         } finally {
-            Log.i("abhay", "Finally block executed")
+            Log.i(TAG, "Finally block executed")
         }
     }
 
@@ -113,9 +113,8 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
         return Uri.EMPTY
     }
 
-
     companion object {
         private const val STARTING_PAGE_INDEX = 1
+        const val TAG = "AlbumPagingSource"
     }
-
 }

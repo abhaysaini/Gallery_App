@@ -3,6 +3,7 @@ package com.example.galleryapp.ui.albums
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +14,7 @@ import com.example.galleryapp.ui.adapter.AlbumAdapter
 import com.example.galleryapp.ui.albums.viewModel.AlbumViewModel
 import com.example.galleryapp.ui.albums.viewModel.AlbumViewModelFactory
 import com.example.galleryapp.ui.images.ImageActivity
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,8 +28,7 @@ class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val factory = AlbumViewModelFactory(AlbumRepository(contentResolver))
-        viewModel = ViewModelProvider(this, factory)[AlbumViewModel::class.java]
+        viewModelInitialize()
         setupRecyclerView()
         viewModel.fetchAlbums()
         lifecycleScope.launch {
@@ -37,6 +38,10 @@ class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
         }
     }
 
+    private fun viewModelInitialize() {
+        val factory = AlbumViewModelFactory(AlbumRepository(contentResolver))
+        viewModel = ViewModelProvider(this, factory)[AlbumViewModel::class.java]
+    }
 
     private fun setupRecyclerView() {
         binding.recyclerView.apply {

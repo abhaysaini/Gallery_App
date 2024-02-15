@@ -49,11 +49,11 @@ class AlbumAdapter(private val listener: OnAlbumClickListener) : PagingDataAdapt
             Glide.with(itemView.context)
                 .load(album.imageUri)
                 .into(binding.albumImage)
-            adapterScope.launch {
-                withContext(IO){
+//            adapterScope.launch {
+//                withContext(IO){
 //                    binding.albumImage.load(album.imageUri)
-                }
-            }
+//                }
+//            }
             binding.albumImageCount.text = album.imageCount.toString()
             itemView.setOnClickListener {
                 listener.onAlbumClick(album)

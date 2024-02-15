@@ -94,4 +94,6 @@ dependencies {
     //Zoom In-Out
     implementation ("com.github.MikeOrtiz:TouchImageView:1.4.1")
 
+    implementation("com.google.code.gson:gson:2.8.8")
+
 }

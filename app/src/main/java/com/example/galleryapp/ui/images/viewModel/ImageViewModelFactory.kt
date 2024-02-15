@@ -9,7 +9,11 @@ class ImageViewModelFactory(private val repository: ImagesRepository) : ViewMode
         if (modelClass.isAssignableFrom(ImageViewModel::class.java)) {
             return ImageViewModel(repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException(ERROR)
+    }
+
+    companion object{
+        const val ERROR = "Unknown ViewModel class"
     }
 }
 

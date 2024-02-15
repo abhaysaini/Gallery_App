@@ -9,6 +9,10 @@ class AlbumViewModelFactory(private val repository: AlbumRepository) : ViewModel
         if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
             return AlbumViewModel(repository) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException(ERROR)
+    }
+
+    companion object{
+        const val ERROR = "Unknown ViewModel class"
     }
 }

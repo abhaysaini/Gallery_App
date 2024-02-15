@@ -1,9 +1,9 @@
 package com.example.galleryapp.ui.images
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,14 +14,16 @@ import com.example.galleryapp.databinding.ActivityImageBinding
 import com.example.galleryapp.ui.adapter.ImageAdapter
 import com.example.galleryapp.ui.images.viewModel.ImageViewModel
 import com.example.galleryapp.ui.images.viewModel.ImageViewModelFactory
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+
 class ImageActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityImageBinding
+    private lateinit var binding: ActivityImageBinding
     private val rvAdapter = ImageAdapter()
-    lateinit var viewModel: ImageViewModel
+    private lateinit var viewModel: ImageViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,31 +31,39 @@ class ImageActivity : AppCompatActivity() {
         binding = ActivityImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val album = intent.getParcelableExtra<AlbumData>("album")
-        Log.i("abhaysaini",album.toString())
-        val factory = ImageViewModelFactory(ImagesRepository(albumData = album!!))
-        viewModel = ViewModelProvider(this, factory)[ImageViewModel::class.java]
+        Log.i(TAG,album.toString())
 
-        val dispatcher = this.onBackPressedDispatcher
-        dispatcher.addCallback(object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finish()
-            }
-        })
-        binding.apply {
-            albumName.text = album.albumName
-            totalImageCount.text = String.format(resources.getString(R.string.image_count_format), album.imageCount)
-            backButton.setOnClickListener {
-            dispatcher.onBackPressed()
-            }
-        }
-
+        album?.let { viewModelInitialize(it) }
+        album?.let { setUpUI(it) }
         setupRecyclerView()
         viewModel.fetchImages()
         lifecycleScope.launch {
             viewModel.imagesLiveData.collectLatest { pagingData ->
-                pagingData?.let { rvAdapter.submitData(it) }
+                pagingData?.let {
+                    try {
+                        rvAdapter.submitData(it)
+                    } catch (e: Exception) {
+                        Log.i(TAG,"$e  Loading Failed")
+                    }
+                }
             }
         }
+    }
+
+    private fun setUpUI(album: AlbumData) {
+        binding.apply {
+            albumName.text = album?.albumName
+            totalImageCount.text =
+                String.format(resources.getString(R.string.image_count_format), album?.imageCount)
+            backButton.setOnClickListener {
+                finish()
+            }
+        }
+    }
+
+    private fun viewModelInitialize(album:AlbumData) {
+        val factory = ImageViewModelFactory(ImagesRepository(albumData = album))
+        viewModel = ViewModelProvider(this, factory)[ImageViewModel::class.java]
     }
 
     private fun setupRecyclerView() {
@@ -63,5 +73,9 @@ class ImageActivity : AppCompatActivity() {
             )
             adapter = rvAdapter
         }
+    }
+
+    companion object{
+        const val TAG = "ImageActivity"
     }
 }
