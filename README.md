@@ -85,6 +85,7 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
 ![](Media/gallery6.png)
   
 
