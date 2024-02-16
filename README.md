@@ -60,7 +60,6 @@ To know more about how I build this project, read my article on **Will Update so
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
   - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
-- [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 - [Coil](https://github.com/coil-kt/coil) - An image-loading library for Android backed by Kotlin Coroutines.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 
