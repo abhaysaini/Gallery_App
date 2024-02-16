@@ -2,7 +2,7 @@
 
 # **Gallery App** 
 
-### **Gallery App** is a cloud based file storing app where you can securely store and access your documents from anywhere around the world!
+### **Gallery App** can access your photos from anywhere with security.!
 
 This project is developed by **Abhay Saini** for Learning Purpose.
 
@@ -28,7 +28,7 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## App Features
 
-- ** Image Gallery** - Browse through your entire photo collection with ease
+- **Image Gallery** - Browse through your entire photo collection with ease
 - **Paging 3 Integration** - Seamlessly navigate through your extensive image library with the power of Paging 3 library, ensuring smooth performance even with large datasets.
 - **MVVM Architecture** - Built using the Model-View-ViewModel architecture pattern, promoting separation of concerns and maintainability of code.
 - **Zoom In and Zoom Out** - Get a closer look at your photos with zoom in and zoom out functionality, allowing you to appreciate every detail.
@@ -42,14 +42,14 @@ To know more about how I build this project, read my article on **Update soon**
 |   |   |   |
 |---|---|---|
 |![](Media/gallery1.png)| ![](Media/gallery2.png) | ![](Media/gallery3.png)
-|![](Media/gallery4.png)| ![](Media/gallery5.png) | ![](Media/gallery6.png)
+|![](Media/gallery4.png)| ![](Media/gallery5.png) | ![](Media/gallery10.png)
 
 ### Technical details 
 
 - This app is made using Kotlin and following Modern Android Development practices.
-- DocuBox uses Kotlin Coroutines and Flow to handle all asynchronous tasks.
-- DocuBox uses some Jetpack libraries, Kotlin + XML and follows MVVM architecture . It also has a G.O.A.T rating in Android's  M.A.D scorecard.
-- DocuBox's code follows all the best practices and software development principles which make it a very good learning resource for beginners as well as for people looking to improve thier software design skills.
+- This app uses Kotlin Coroutines and Flow to handle all asynchronous tasks.
+- This app uses some Jetpack libraries, Kotlin + XML and follows MVVM architecture . It also has a G.O.A.T rating in Android's  M.A.D scorecard.
+- This app code follows all the best practices and software development principles which make it a very good learning resource for beginners as well as for people looking to improve thier software design skills.
 
 ![summary.jpg](media/summary.png)
 
@@ -85,8 +85,7 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
-
-![](media/gallery10.png)
+![](Media/gallery6.png)
   
 
  ## Contact
