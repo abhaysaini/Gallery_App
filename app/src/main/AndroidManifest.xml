@@ -27,7 +27,7 @@
             android:name=".ui.images.ImageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.splash.SplashScreenActivity"
+            android:name=".ui.splash.SplashScreen"
             android:exported="true"
             android:theme="@style/Base.Theme.GalleryApp">
             <intent-filter>
