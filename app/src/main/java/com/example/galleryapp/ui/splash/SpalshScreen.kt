@@ -1,13 +1,10 @@
 package com.example.galleryapp.ui.splash
 
 
-import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +16,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.annotation.RequiresPermission
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -36,7 +32,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import com.example.galleryapp.R
 import com.example.galleryapp.ui.albums.AlbumsActivity
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -75,13 +70,12 @@ class SplashScreen : ComponentActivity() {
             }
         }
         LaunchedEffect(key1 = permission) {
-            if(permission.hasPermission){
+            if (permission.hasPermission) {
                 CoroutineScope(Dispatchers.Main).launch {
                     delay(1000)
                     navigateToMainActivity(this@SplashScreen)
                 }
-            }
-            else{
+            } else {
                 askPermission(permissionLauncher)
             }
         }
@@ -99,10 +93,13 @@ class SplashScreen : ComponentActivity() {
                 contentDescription = null,
                 modifier = Modifier
                     .size(310.dp)
+                    .fillMaxHeight()
+                    .weight(1f)
                     .align(Alignment.CenterHorizontally)
-                    .offset(y = (-50).dp)
-
             )
+            Spacer(modifier = Modifier
+                .fillMaxHeight()
+                .weight(0.7f))
             Text(
                 text = "Gallery App",
                 color = Color(0xFF98BFFD),
@@ -111,7 +108,6 @@ class SplashScreen : ComponentActivity() {
                 fontFamily = FontFamily.Default,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .offset(y = (-16).dp)
             )
             Text(
                 text = "Explore your visual story",

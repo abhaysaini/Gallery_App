@@ -35,52 +35,13 @@ class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModelInitialize()
-        if(!checkPermission()){
-           appSettingOpen(this)
-        }
-        else{
-            setupRecyclerView()
-            viewModel.fetchAlbums()
-            lifecycleScope.launch {
-                viewModel.albumList.collectLatest { pagingData ->
-                    pagingData?.let { rvAdapter.submitData(it) }
-                }
+        setupRecyclerView()
+        viewModel.fetchAlbums()
+        lifecycleScope.launch {
+            viewModel.albumList.collectLatest { pagingData ->
+                pagingData?.let { rvAdapter.submitData(it) }
             }
         }
-    }
-
-    private fun checkPermission():Boolean{
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_MEDIA_IMAGES
-            ) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-        ){
-            return false
-        }
-        else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_DENIED){
-            return false
-        }
-        else if(ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_DENIED
-        ){
-            return false
-        }
-        return true
-    }
-
-    private fun appSettingOpen(context: Context){
-        Toast.makeText(
-            context,
-            "Go to Setting and Enable All Permission",
-            Toast.LENGTH_LONG
-        ).show()
-
-        val settingIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        settingIntent.data = Uri.parse("package:${context.packageName}")
-        context.startActivity(settingIntent)
     }
 
     private fun viewModelInitialize() {

@@ -52,9 +52,9 @@ class ImageActivity : AppCompatActivity() {
 
     private fun setUpUI(album: AlbumData) {
         binding.apply {
-            albumName.text = album?.albumName
+            albumName.text = album.albumName
             totalImageCount.text =
-                String.format(resources.getString(R.string.image_count_format), album?.imageCount)
+                String.format(resources.getString(R.string.image_count_format), album.imageCount)
             backButton.setOnClickListener {
                 finish()
             }
