@@ -71,16 +71,16 @@ To know more about how I build this project, read my article on **Update soon**
 
 ![](media/package%20structure.png)
     
-    com.docubox             # Root Package
+    com.example.galleryapp     # Root Package
     .
-    ├── data                # For data handling.
-    |   ├── model           # Model data classes 
-    │   ├── repo            # Single source of data.
-    │   └── paging          # Pagination logic and data sources.
+    ├── data                   # For data handling.
+    |   ├── model              # Model data classes 
+    │   ├── repo               # Single source of data.
+    │   └── paging             # Pagination logic and data sources.
     |
-    ├── ui                  # UI/View layer
-    |   ├── adapters        # Adapter, ViewHolder 
-    |   └── screens         # All App Screens 
+    ├── ui                     # UI/View layer
+    |   ├── adapters           # Adapter, ViewHolder 
+    |   └── screens            # All App Screens 
 
 
 ## Architecture
