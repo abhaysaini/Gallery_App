@@ -1,8 +1,7 @@
-package com.example.galleryapp.ui.images
+package com.example.galleryapp.ui.screens.images
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -12,8 +11,8 @@ import com.example.galleryapp.data.models.AlbumData
 import com.example.galleryapp.data.repository.ImagesRepository
 import com.example.galleryapp.databinding.ActivityImageBinding
 import com.example.galleryapp.ui.adapter.ImageAdapter
-import com.example.galleryapp.ui.images.viewModel.ImageViewModel
-import com.example.galleryapp.ui.images.viewModel.ImageViewModelFactory
+import com.example.galleryapp.ui.screens.images.viewModel.ImageViewModel
+import com.example.galleryapp.ui.screens.images.viewModel.ImageViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

@@ -1,16 +1,8 @@
-package com.example.galleryapp.ui.albums
+package com.example.galleryapp.ui.screens.albums
 
-import android.Manifest
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,9 +10,9 @@ import com.example.galleryapp.data.models.AlbumData
 import com.example.galleryapp.databinding.ActivityMainBinding
 import com.example.galleryapp.data.repository.AlbumRepository
 import com.example.galleryapp.ui.adapter.AlbumAdapter
-import com.example.galleryapp.ui.albums.viewModel.AlbumViewModel
-import com.example.galleryapp.ui.albums.viewModel.AlbumViewModelFactory
-import com.example.galleryapp.ui.images.ImageActivity
+import com.example.galleryapp.ui.screens.albums.viewModel.AlbumViewModel
+import com.example.galleryapp.ui.screens.albums.viewModel.AlbumViewModelFactory
+import com.example.galleryapp.ui.screens.images.ImageActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

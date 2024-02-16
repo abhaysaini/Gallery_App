@@ -65,6 +65,14 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("androidx.compose.material3:material3:$1.2.0")
     implementation("com.google.accompanist:accompanist-permissions:0.23.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta01")
+
+
+    //Compose Paging 3
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-compose:3.2.1")
+    testImplementation("androidx.paging:paging-common:$3.2.1")
+
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

@@ -1,10 +1,9 @@
-package com.example.galleryapp.ui.fullScreen
+package com.example.galleryapp.ui.screens.fullScreen
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.OnBackPressedCallback
 import com.bumptech.glide.Glide
 import com.example.galleryapp.databinding.ActivityImageDetailScreenBinding
 

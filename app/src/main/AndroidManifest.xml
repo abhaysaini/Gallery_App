@@ -18,16 +18,16 @@
         android:theme="@style/Theme.GalleryApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.fullScreen.ImageDetailScreenActivity"
+            android:name=".ui.screens.fullScreen.ImageDetailScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.images.ImageActivity"
+            android:name=".ui.screens.images.ImageActivity"
             android:exported="false" />
-        <activity android:name=".ui.fullScreen.ImageDetailScreen"
+        <activity android:name=".ui.screens.fullScreen.ImageDetailScreen"
             android:exported="false"
             />
         <activity
-            android:name=".ui.splash.SplashScreen"
+            android:name=".ui.screens.splash.SplashScreen"
             android:exported="true"
             android:theme="@style/Base.Theme.GalleryApp">
             <intent-filter>
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.albums.AlbumsActivity"
+            android:name=".ui.screens.albums.AlbumsActivity"
             android:exported="false" />
 
         <meta-data

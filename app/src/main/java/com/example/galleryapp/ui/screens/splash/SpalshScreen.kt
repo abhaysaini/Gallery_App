@@ -1,4 +1,4 @@
-package com.example.galleryapp.ui.splash
+package com.example.galleryapp.ui.screens.splash
 
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.galleryapp.R
-import com.example.galleryapp.ui.albums.AlbumsActivity
+import com.example.galleryapp.ui.screens.albums.AlbumsActivity
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.CoroutineScope

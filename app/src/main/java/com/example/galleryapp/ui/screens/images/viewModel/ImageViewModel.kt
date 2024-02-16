@@ -1,13 +1,9 @@
-package com.example.galleryapp.ui.images.viewModel
+package com.example.galleryapp.ui.screens.images.viewModel
 
-import android.net.Uri
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.galleryapp.data.models.AlbumData
 import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.data.repository.ImagesRepository
 import kotlinx.coroutines.flow.Flow

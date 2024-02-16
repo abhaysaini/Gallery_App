@@ -1,4 +1,5 @@
-package com.example.galleryapp.ui.albums.viewModel
+package com.example.galleryapp.ui.screens.albums.viewModel
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collectLatest

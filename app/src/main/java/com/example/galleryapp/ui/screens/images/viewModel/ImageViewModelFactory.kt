@@ -1,4 +1,4 @@
-package com.example.galleryapp.ui.images.viewModel
+package com.example.galleryapp.ui.screens.images.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

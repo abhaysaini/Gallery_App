@@ -7,17 +7,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
 import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.databinding.ItemImageBinding
-import com.example.galleryapp.ui.fullScreen.ImageDetailScreen
-import com.example.galleryapp.ui.fullScreen.ImageDetailScreenActivity
+import com.example.galleryapp.ui.screens.fullScreen.ImageDetailScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ImageAdapter :
     PagingDataAdapter<ImageData, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
