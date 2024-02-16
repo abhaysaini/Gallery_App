@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Gallery App</string>
+    <string name="total_images">Total Image\n</string>
+    <string name="title_activity_splash_jetpack">SplashJetpack</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="title_activity_basic">basic</string>
+    <string name="favourite">Favourite</string>
+    <string name="imageCount">40</string>
+    <string name="album">Essential Albums</string>
+    <string name="galleryApp">Gallery App</string>
+    <string name="quote">Explore your visual story</string>
+    <string name="image_count_format">%d : Images</string>
 </resources>
