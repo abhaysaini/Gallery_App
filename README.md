@@ -36,17 +36,13 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## Insights into the app 🔎
 
-![](media/gallery1.png)
-![](media/gallery2.png)
-![](media/gallery3.png)
-![](media/gallery4.png)
-![](media/gallery5.png)
+![](Media/gallery.png)
 ## 📸 Screenshots 
 
 |   |   |   |
 |---|---|---|
-|![](media/gallery1.png)| ![](media/gallery2.png) | ![](media/gallery3.png)
-|![](media/gallery4.png)| ![](media/gallery5.png) | ![](media/gallery6.png)
+|![](Media/gallery1.png)| ![](Media/gallery2.png) | ![](Media/gallery3.png)
+|![](Media/gallery4.png)| ![](Media/gallery5.png) | ![](Media/gallery6.png)
 
 ### Technical details 
 
