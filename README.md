@@ -1,4 +1,4 @@
-![](media/cover.png)
+![](Media/gallery7.png)
 
 # **Gallery App** 
 
@@ -36,7 +36,7 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## Insights into the app 🔎
 
-![](Media/gallery.png)
+![](Media/gallery7.png)
 ## 📸 Screenshots 
 
 |   |   |   |
