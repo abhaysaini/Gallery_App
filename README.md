@@ -69,7 +69,7 @@ To know more about how I build this project, read my article on **Update soon**
 
 ## Package Structure
 
-![](media/package%20structure.png)
+![](Media/)
     
     com.example.galleryapp     # Root Package
     .
