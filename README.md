@@ -50,7 +50,6 @@ To know more about how I build this project, read my article on **Will Update so
 - This app uses some Jetpack libraries, Kotlin + XML, and follows MVVM architecture.
 - This app code follows all the best practices and software development principles which makes it a very good learning resource for beginners as well as for people looking to improve their software design skills.
 
-![summary.jpg](media/summary.png)
 
 
 ## Built With 🛠
@@ -63,9 +62,6 @@ To know more about how I build this project, read my article on **Will Update so
 - [Coil](https://github.com/coil-kt/coil) - An image-loading library for Android backed by Kotlin Coroutines.
 - [Glide](https://github.com/bumptech/glide) - An image-loading library for Android powered by a powerful and flexible image loading and caching engine.
 
-## Package Structure
-
-![](Media/)
     
     com.example.galleryapp     # Root Package
     .
