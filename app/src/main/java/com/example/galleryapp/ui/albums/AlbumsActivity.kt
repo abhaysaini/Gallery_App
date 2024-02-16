@@ -1,9 +1,16 @@
 package com.example.galleryapp.ui.albums
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +21,6 @@ import com.example.galleryapp.ui.adapter.AlbumAdapter
 import com.example.galleryapp.ui.albums.viewModel.AlbumViewModel
 import com.example.galleryapp.ui.albums.viewModel.AlbumViewModelFactory
 import com.example.galleryapp.ui.images.ImageActivity
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -29,13 +35,52 @@ class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModelInitialize()
-        setupRecyclerView()
-        viewModel.fetchAlbums()
-        lifecycleScope.launch {
-            viewModel.albumList.collectLatest { pagingData ->
-                pagingData?.let { rvAdapter.submitData(it) }
+        if(!checkPermission()){
+           appSettingOpen(this)
+        }
+        else{
+            setupRecyclerView()
+            viewModel.fetchAlbums()
+            lifecycleScope.launch {
+                viewModel.albumList.collectLatest { pagingData ->
+                    pagingData?.let { rvAdapter.submitData(it) }
+                }
             }
         }
+    }
+
+    private fun checkPermission():Boolean{
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_DENIED && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+        ){
+            return false
+        }
+        else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED){
+            return false
+        }
+        else if(ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED
+        ){
+            return false
+        }
+        return true
+    }
+
+    private fun appSettingOpen(context: Context){
+        Toast.makeText(
+            context,
+            "Go to Setting and Enable All Permission",
+            Toast.LENGTH_LONG
+        ).show()
+
+        val settingIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        settingIntent.data = Uri.parse("package:${context.packageName}")
+        context.startActivity(settingIntent)
     }
 
     private fun viewModelInitialize() {
