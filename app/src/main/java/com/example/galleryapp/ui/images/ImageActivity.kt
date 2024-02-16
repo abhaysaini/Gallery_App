@@ -14,7 +14,6 @@ import com.example.galleryapp.databinding.ActivityImageBinding
 import com.example.galleryapp.ui.adapter.ImageAdapter
 import com.example.galleryapp.ui.images.viewModel.ImageViewModel
 import com.example.galleryapp.ui.images.viewModel.ImageViewModelFactory
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

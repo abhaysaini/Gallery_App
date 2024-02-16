@@ -11,6 +11,7 @@ import coil.load
 import com.bumptech.glide.Glide
 import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.databinding.ItemImageBinding
+import com.example.galleryapp.ui.fullScreen.ImageDetailScreen
 import com.example.galleryapp.ui.fullScreen.ImageDetailScreenActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +50,7 @@ class ImageAdapter :
 //                }
 //            }
             itemView.setOnClickListener {
-                val imageIntent = Intent(itemView.context, ImageDetailScreenActivity::class.java)
+                val imageIntent = Intent(itemView.context, ImageDetailScreen::class.java)
                 imageIntent.putExtra("imageUri", uri)
                 itemView.context.startActivity(imageIntent)
             }

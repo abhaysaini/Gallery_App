@@ -23,6 +23,9 @@
         <activity
             android:name=".ui.images.ImageActivity"
             android:exported="false" />
+        <activity android:name=".ui.fullScreen.ImageDetailScreen"
+            android:exported="false"
+            />
         <activity
             android:name=".ui.splash.SplashScreen"
             android:exported="true"

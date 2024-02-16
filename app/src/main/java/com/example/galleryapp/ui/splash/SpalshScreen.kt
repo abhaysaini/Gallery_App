@@ -97,9 +97,6 @@ class SplashScreen : ComponentActivity() {
                     .weight(1f)
                     .align(Alignment.CenterHorizontally)
             )
-            Spacer(modifier = Modifier
-                .fillMaxHeight()
-                .weight(0.7f))
             Text(
                 text = "Gallery App",
                 color = Color(0xFF98BFFD),
@@ -108,6 +105,7 @@ class SplashScreen : ComponentActivity() {
                 fontFamily = FontFamily.Default,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .offset(y = (-100).dp)
             )
             Text(
                 text = "Explore your visual story",
@@ -117,6 +115,7 @@ class SplashScreen : ComponentActivity() {
                 fontFamily = FontFamily.Default,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
+                    .offset(y = -90.dp)
             )
         }
     }
