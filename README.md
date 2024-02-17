@@ -62,6 +62,8 @@ To know more about how I build this project, read my article on **Will Update so
 - [Coil](https://github.com/coil-kt/coil) - An image-loading library for Android backed by Kotlin Coroutines.
 - [Glide](https://github.com/bumptech/glide) - An image-loading library for Android powered by a powerful and flexible image loading and caching engine.
 
+## Package Structure
+
     
     com.example.galleryapp     # Root Package
     .
