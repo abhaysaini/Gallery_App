@@ -44,7 +44,6 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
     private suspend fun fetchAlbums(contentResolver: ContentResolver): List<AlbumData> {
         val albums = mutableListOf<AlbumData>()
         val albumSet = mutableSetOf<String>()
-        val albumImagesUri = mutableMapOf<String, MutableList<Uri>>()
         val albumMap = mutableMapOf<String, Pair<String, Int>>()
         var imageCount = 0
         val projection = arrayOf(
@@ -64,13 +63,11 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
                         cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_ID))
                     if (!albumSet.contains(folderId)) {
                         albumSet.add(folderId)
-                        albumImagesUri[folderId] = mutableListOf()
                     }
                     val imageUri = ContentUris.withAppendedId(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
                     )
-                    albumImagesUri[folderId]?.add(imageUri)
                     val albumName =
                         cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
                     imageCount = albumMap[folderId]?.second ?: 0
@@ -81,8 +78,7 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
         }
         albumMap.forEach { (folderId, pair) ->
             val thumbNail = getAlbumThumbnail(contentResolver, bucketId = folderId)
-            val imageUriList = albumImagesUri[folderId] ?: emptyList()
-            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second, imageUriList))
+            albums.add(AlbumData(folderId, thumbNail, pair.first, pair.second))
         }
         return albums
     }

@@ -10,5 +10,4 @@ data class AlbumData (
     val imageUri : Uri,
     val albumName: String,
     val imageCount:Int,
-    val imagesUriData : List<Uri>
 ) : Parcelable
