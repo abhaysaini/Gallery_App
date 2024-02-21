@@ -60,7 +60,7 @@ class ImageActivity : AppCompatActivity() {
     }
 
     private fun viewModelInitialize(album:AlbumData) {
-        val factory = ImageViewModelFactory(ImagesRepository(albumData = album))
+        val factory = ImageViewModelFactory(ImagesRepository(albumData = album,contentResolver))
         viewModel = ViewModelProvider(this, factory)[ImageViewModel::class.java]
     }
 

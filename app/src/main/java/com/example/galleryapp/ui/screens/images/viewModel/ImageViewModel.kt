@@ -1,5 +1,6 @@
 package com.example.galleryapp.ui.screens.images.viewModel
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -13,8 +14,8 @@ import kotlinx.coroutines.launch
 
 class ImageViewModel (private val repository: ImagesRepository): ViewModel() {
 
-    private val _imagesLiveData = MutableStateFlow<PagingData<ImageData>?>(null)
-    val imagesLiveData: Flow<PagingData<ImageData>?> = _imagesLiveData
+    private val _imagesLiveData = MutableStateFlow<PagingData<Uri>?>(null)
+    val imagesLiveData: Flow<PagingData<Uri>?> = _imagesLiveData
 
     init {
         fetchImages()

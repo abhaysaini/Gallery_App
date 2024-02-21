@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
 class ImageAdapter :
-    PagingDataAdapter<ImageData, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
+    PagingDataAdapter<Uri, ImageAdapter.ImagesViewHolder>(IMAGES_COMPARATOR) {
 
     private lateinit var binding: ItemImageBinding
     private val adapterScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -24,7 +24,7 @@ class ImageAdapter :
     override fun onBindViewHolder(holder: ImageAdapter.ImagesViewHolder, position: Int) {
         val album = getItem(position)
         album?.let {
-            holder.bind(it.imageUri)
+            holder.bind(it)
         }
     }
 
@@ -54,13 +54,13 @@ class ImageAdapter :
     }
 
     companion object {
-        private val IMAGES_COMPARATOR = object : DiffUtil.ItemCallback<ImageData>() {
-            override fun areItemsTheSame(oldItem: ImageData, newItem: ImageData): Boolean {
+        private val IMAGES_COMPARATOR = object : DiffUtil.ItemCallback<Uri>() {
+            override fun areItemsTheSame(oldItem: Uri, newItem: Uri): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ImageData, newItem: ImageData): Boolean {
-                return oldItem.imageUri == newItem.imageUri
+            override fun areContentsTheSame(oldItem: Uri, newItem: Uri): Boolean {
+                return oldItem == newItem
             }
         }
     }
