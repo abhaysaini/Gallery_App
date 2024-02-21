@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val rvAdapter = AlbumAdapter(this)
     lateinit var viewModel: AlbumViewModel
 

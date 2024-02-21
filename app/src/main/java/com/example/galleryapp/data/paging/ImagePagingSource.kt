@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.galleryapp.data.models.AlbumData
-import com.example.galleryapp.data.models.ImageData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 class ImagePagingSource(private val albumData: AlbumData, private val contentResolver: ContentResolver) :

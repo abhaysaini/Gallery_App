@@ -6,7 +6,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.galleryapp.data.models.AlbumData
-import com.example.galleryapp.data.models.ImageData
 import com.example.galleryapp.data.paging.ImagePagingSource
 import kotlinx.coroutines.flow.Flow
 

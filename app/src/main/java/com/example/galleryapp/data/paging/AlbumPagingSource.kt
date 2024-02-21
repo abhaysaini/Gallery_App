@@ -64,10 +64,6 @@ class AlbumPagingSource(private val contentResolver: ContentResolver) :
                     if (!albumSet.contains(folderId)) {
                         albumSet.add(folderId)
                     }
-                    val imageUri = ContentUris.withAppendedId(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))
-                    )
                     val albumName =
                         cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
                     imageCount = albumMap[folderId]?.second ?: 0

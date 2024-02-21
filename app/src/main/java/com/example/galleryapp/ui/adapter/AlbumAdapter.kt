@@ -14,8 +14,7 @@ import kotlinx.coroutines.SupervisorJob
 
 class AlbumAdapter(private val listener: OnAlbumClickListener) : PagingDataAdapter<AlbumData, AlbumAdapter.AlbumViewHolder>(ALBUM_COMPARATOR) {
 
-    lateinit var binding: ItemAlbumsBinding
-    private val adapterScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    private lateinit var binding: ItemAlbumsBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         binding = ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -36,11 +35,6 @@ class AlbumAdapter(private val listener: OnAlbumClickListener) : PagingDataAdapt
             Glide.with(itemView.context)
                 .load(album.imageUri)
                 .into(binding.albumImage)
-//            adapterScope.launch {
-//                withContext(IO){
-//                    binding.albumImage.load(album.imageUri)
-//                }
-//            }
             binding.albumImageCount.text = album.imageCount.toString()
             itemView.setOnClickListener {
                 listener.onAlbumClick(album)

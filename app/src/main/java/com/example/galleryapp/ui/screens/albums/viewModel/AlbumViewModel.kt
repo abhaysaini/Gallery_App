@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class AlbumViewModel(private val repository: AlbumRepository) : ViewModel() {
 
-    private val _albumnList = MutableStateFlow<PagingData<AlbumData>?>(null)
-    val albumList: Flow<PagingData<AlbumData>?> = _albumnList
+    private val _albumList = MutableStateFlow<PagingData<AlbumData>?>(null)
+    val albumList: Flow<PagingData<AlbumData>?> = _albumList
 
     init {
         fetchAlbums()
@@ -24,7 +24,7 @@ class AlbumViewModel(private val repository: AlbumRepository) : ViewModel() {
         viewModelScope.launch {
             val pager = repository.getAlbums()
             pager.cachedIn(viewModelScope).collectLatest { pagingData ->
-                _albumnList.value = pagingData
+                _albumList.value = pagingData
             }
         }
     }
