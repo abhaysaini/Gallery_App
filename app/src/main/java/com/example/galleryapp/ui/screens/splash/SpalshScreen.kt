@@ -1,10 +1,13 @@
 package com.example.galleryapp.ui.screens.splash
 
 
+import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.example.galleryapp.R
 import com.example.galleryapp.ui.screens.albums.AlbumsActivity
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -115,7 +119,7 @@ class SplashScreen : ComponentActivity() {
                 fontFamily = FontFamily.Default,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .offset(y = -90.dp)
+                    .offset(y = (-90).dp)
             )
         }
     }
@@ -126,16 +130,39 @@ class SplashScreen : ComponentActivity() {
         finish()
     }
 
-    private fun appSettingOpen(context: Context) {
+    private fun appSettingOpen(activity:Activity) {
         Toast.makeText(
-            context,
+            activity,
             "Go to Setting and Enable All Permission",
             Toast.LENGTH_LONG
         ).show()
 
         val settingIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        settingIntent.data = Uri.parse("package:${context.packageName}")
-        context.startActivity(settingIntent)
+        settingIntent.data = Uri.parse("package:${activity.packageName}")
+        activity.startActivityForResult(settingIntent,1001)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1001) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) READ_MEDIA_IMAGES else READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1000)
+                    navigateToMainActivity(this@SplashScreen)
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    "Allow all the permissions",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     private fun askPermission(

@@ -1,5 +1,6 @@
 package com.example.galleryapp.ui.screens.albums
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,26 +14,26 @@ import com.example.galleryapp.ui.adapter.AlbumAdapter
 import com.example.galleryapp.ui.screens.albums.viewModel.AlbumViewModel
 import com.example.galleryapp.ui.screens.albums.viewModel.AlbumViewModelFactory
 import com.example.galleryapp.ui.screens.images.ImageActivity
-import kotlinx.coroutines.flow.collectLatest
+import com.example.galleryapp.utils.AppUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val rvAdapter = AlbumAdapter(this)
-    lateinit var viewModel: AlbumViewModel
+    private lateinit var viewModel: AlbumViewModel
+    private var albumsList = mutableListOf<AlbumData>()
+    private lateinit var albumAdapter : AlbumAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModelInitialize()
-        setupRecyclerView()
-        viewModel.fetchAlbums()
         lifecycleScope.launch {
-            viewModel.albumList.collectLatest { pagingData ->
-                pagingData?.let { rvAdapter.submitData(it) }
-            }
+           albumsList = AppUtils().fetchAlbums(contentResolver)
+            setupRecyclerView(albumsList)
         }
     }
 
@@ -41,12 +42,17 @@ class AlbumsActivity : AppCompatActivity(), AlbumAdapter.OnAlbumClickListener {
         viewModel = ViewModelProvider(this, factory)[AlbumViewModel::class.java]
     }
 
-    private fun setupRecyclerView() {
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(
-                this@AlbumsActivity, 3
-            )
-            adapter = rvAdapter
+    @SuppressLint("NotifyDataSetChanged")
+    private suspend fun setupRecyclerView(album: MutableList<AlbumData>) {
+        withContext(Dispatchers.Main) {
+            albumAdapter = AlbumAdapter(this@AlbumsActivity,album)
+            binding.recyclerView.apply {
+                layoutManager = GridLayoutManager(
+                    this@AlbumsActivity, 3
+                )
+                adapter = albumAdapter
+            }
+            albumAdapter.notifyDataSetChanged()
         }
     }
 
