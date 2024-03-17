@@ -2,6 +2,7 @@ package com.example.galleryapp.ui.screens.images
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,15 +14,17 @@ import com.example.galleryapp.databinding.ActivityImageBinding
 import com.example.galleryapp.ui.adapter.ImageAdapter
 import com.example.galleryapp.ui.screens.images.viewModel.ImageViewModel
 import com.example.galleryapp.ui.screens.images.viewModel.ImageViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class ImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageBinding
     private val rvAdapter = ImageAdapter()
-    private lateinit var viewModel: ImageViewModel
+    private val viewModel: ImageViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +34,9 @@ class ImageActivity : AppCompatActivity() {
         val album = intent.getParcelableExtra<AlbumData>("album")
         Log.i(TAG,album.toString())
 
-        album?.let { viewModelInitialize(it) }
         album?.let { setUpUI(it) }
         setupRecyclerView()
-        viewModel.fetchImages()
+        album?.let { viewModel.fetchImages(it) }
         lifecycleScope.launch {
             viewModel.imagesLiveData.collectLatest { pagingData ->
                 pagingData?.let {
@@ -57,11 +59,6 @@ class ImageActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    private fun viewModelInitialize(album:AlbumData) {
-        val factory = ImageViewModelFactory(ImagesRepository(albumData = album,contentResolver))
-        viewModel = ViewModelProvider(this, factory)[ImageViewModel::class.java]
     }
 
     private fun setupRecyclerView() {

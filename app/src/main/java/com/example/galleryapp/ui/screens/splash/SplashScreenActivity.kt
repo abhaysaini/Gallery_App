@@ -13,14 +13,16 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.galleryapp.databinding.ActivitySplashScreenBinding
 import com.example.galleryapp.ui.screens.albums.AlbumsActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivitySplashScreenBinding
+    private lateinit var binding:ActivitySplashScreenBinding
     private val splashTime: Long = 2300
 
 

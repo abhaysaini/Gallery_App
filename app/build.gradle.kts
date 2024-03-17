@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -38,6 +40,9 @@ android {
         viewBinding = true
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -47,7 +52,7 @@ android {
 
 dependencies {
 
-//    Compose
+    // Compose
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
@@ -63,28 +68,28 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.compose.material3:material3:$1.2.0")
+    implementation("androidx.compose.material3:material3:1.2.1")
     implementation("com.google.accompanist:accompanist-permissions:0.23.1")
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-beta01")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
 
 
     //Compose Paging 3
-    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
     implementation("androidx.paging:paging-compose:3.2.1")
-    testImplementation("androidx.paging:paging-common:$3.2.1")
+    testImplementation("androidx.paging:paging-common-ktx:3.2.1")
 
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     //Pagination 3
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
     //Material Design
-    implementation("com.google.android.material:material:1.5.0")
+    implementation("com.google.android.material:material:1.11.0")
 
     //Glide Coil Volley
     implementation("com.github.bumptech.glide:glide:4.16.0")
@@ -105,6 +110,15 @@ dependencies {
     implementation("com.github.MikeOrtiz:TouchImageView:1.4.1")
 
     //Coil
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    //Hilt Dagger
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    // Fonts
+    implementation("androidx.compose.ui:ui-text:1.6.3")
+
 
 }

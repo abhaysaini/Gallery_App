@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.galleryapp.databinding.ActivityImageDetailScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ImageDetailScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageDetailScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {

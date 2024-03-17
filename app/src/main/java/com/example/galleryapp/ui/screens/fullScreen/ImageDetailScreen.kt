@@ -7,14 +7,13 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -26,9 +25,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import coil.compose.rememberImagePainter
+import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.galleryapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ImageDetailScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +55,11 @@ fun ImageDetailScreen(imageUri: Uri?,backPressedDispatcher: OnBackPressedDispatc
             mutableFloatStateOf(1f)
         }
         val painter =
-            rememberImagePainter(data = imageUri)
+            rememberAsyncImagePainter(model = imageUri)
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(Color.Black)
         ) {
             MyToolbar {
                     backPressedDispatcher.onBackPressed()
@@ -75,26 +78,27 @@ fun ImageDetailScreen(imageUri: Uri?,backPressedDispatcher: OnBackPressedDispatc
                         scaleX = scale
                         scaleY = scale
                     }
-                    .weight(1f),
+                    .weight(1f)
+                    .background(Color.Black)
+                ,
                 contentScale = ContentScale.Fit
             )
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyToolbar(onBackPressed: () -> Unit) {
-    TopAppBar(
-        title = {},
-        navigationIcon = {
-            IconButton(onClick = onBackPressed) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_back_button),
-                    contentDescription = "Back Button",
-                    tint = Color(0xFFC58BF2)
-                )
-            }
+    Row(modifier = Modifier.background(Color.Black)) {
+        IconButton(
+            onClick = { onBackPressed() },
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back_button),
+                contentDescription = "Back Button",
+                tint = Color(0xFFC58BF2)
+            )
         }
-    )
+    }
 }

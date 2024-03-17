@@ -1,7 +1,6 @@
 package com.example.galleryapp.ui.screens.splash
 
 
-import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.app.Activity
@@ -37,14 +36,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.example.galleryapp.R
-import com.example.galleryapp.ui.screens.albums.AlbumsActivity
+import com.example.galleryapp.ui.screens.albums.AlbumScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashScreen : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -125,7 +126,7 @@ class SplashScreen : ComponentActivity() {
     }
 
     private fun navigateToMainActivity(context: Context) {
-        val intent = Intent(context, AlbumsActivity::class.java)
+        val intent = Intent(context, AlbumScreen::class.java)
         startActivity(intent)
         finish()
     }
